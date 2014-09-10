@@ -28,7 +28,7 @@ void Resize(int w, int h)
     // define the visible area of the window ( in pixels )
 
     if (h==0) h=1;
-    glViewport(0,0,w,h);
+    glViewport(w/3, h/3, w, h);
     //glViewport(100,100,400,400);
 
     // Setup viewing volume
