@@ -27,3 +27,7 @@ all : $(OBJS)
 # Shorthand for running the compiled thing
 run	:
 	./$(OBJ_NAME)
+
+# removes binaries
+clean :
+	rm $(OBJ_NAME)
