@@ -23,3 +23,7 @@ LINKER_FLAGS = -framework OpenGL -lGLUT
 # This is the target that compiles our executable
 all : $(OBJS)
 	$(CC) $(OBJS) $(INCLUDE_PATHS) $(LIBRARY_PATHS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+
+# Shorthand for running the compiled thing
+run	:
+	./$(OBJ_NAME)
