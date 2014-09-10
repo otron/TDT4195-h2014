@@ -31,3 +31,9 @@ run	:
 # removes binaries
 clean :
 	rm $(OBJ_NAME)
+
+# cleans, compiles and runs
+crun :
+	make clean
+	make all
+	make run
