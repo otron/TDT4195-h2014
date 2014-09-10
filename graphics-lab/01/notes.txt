@@ -58,4 +58,24 @@ freeglut-2.8.1
 version 4.8.3 (Homebrew gcc 4.8.3_1)
 used vim for editing. #vimlyfe
 
+# PART 2 -- three alternatives to GLM
+What kind of math do we need to do when working with graphics?
+Matrix-stuff, mostly.
+So one requirement for a GLM alternative is that it does matrix and vector stuff.
+
+The alternatives could also be evaluated on the activity level of their communities and the availability of answers or solutions to common problems (and more specific ones) or use cases.
+
+1. CML -- configurable math library
+http://cmldev.net/
+This library is currently being developed by Demian Nave and Jesse Anders.
+According to its website it is designed for use in graphics, amongst other things.
+
+2. Eigen
+http://eigen.tuxfamily.org/index.php?title=Main_Page
+Eigen is ``a C++ template library for linear algebra.''
+Graphics involves linear algebra.
+
+3. Armadillo
+http://arma.sourceforge.net/
+This is another ``high quality'' C++ linear algebra library.
 
