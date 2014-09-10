@@ -11,10 +11,10 @@ void Render()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glColor3f(1.0, 0.5, 0.2);							   // Set drawing colour = orange
-//    glutSolidTeapot( 20.0 );							   // Draw a built-in primitive
+    glColor3f(1.0, 0.7, 0.2);							   // Set drawing colour = orange
+    glutSolidTeapot( 20.0 );							   // Draw a built-in primitive
 //    glutWireTeapot(20.0);
-    glutSolidSphere(20.0,90,124);
+    //glutSolidSphere(20.0,90,124);
 
     glutSwapBuffers();             // All drawing commands applied to the
     // hidden buffer, so now, bring forward
