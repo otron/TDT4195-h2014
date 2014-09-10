@@ -47,3 +47,15 @@ Or the argument might be for something completely different.
 The draw function is set as the drawing function for the display and then the main loop of glut is set in motion.
 
 The draw function draws a black background.
+
+# PART 0 -- my setup
+OS X 10.9.4 (13E28)
+MacBookPro11,1
+
+cmake-3.0.0
+freeglut-2.8.1
+
+version 4.8.3 (Homebrew gcc 4.8.3_1)
+used vim for editing. #vimlyfe
+
+
