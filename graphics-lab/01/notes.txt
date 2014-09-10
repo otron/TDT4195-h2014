@@ -1,0 +1,32 @@
+OS X 10.9.4 (13E28)
+MacBookPro11,1
+
+cmake-3.0.0
+freeglut-2.8.1
+
+
+freeGLUT
+	comes with hello_opengl.zip
+
+GLM
+	just add the header files to the project
+	but where do I get the header files? let's not think about that right now.
+
+# can I compile the project straight away?
+Yes and no. It doesn't abort compilation, but it does complain about "ERROR GLUT not found!"
+
+Do I need to include both .h and .cpp if the .cpp includes the .h?
+
+Even after replacing glut-include with freeglut it complains about glut not being found.
+oh, I have to download the lib myself?
+I have to compile it myself as well. Hrm.
+
+# Installing freeglut
+Tried following the instructions in readme.mac, didn't work.
+Googled and found https://stackoverflow.com/questions/19648087/installing-freeglut-on-os-x-mavericks
+which led me to http://lazyfoo.net/tutorials/OpenGL/01_hello_opengl/mac/index.php
+I need xquartz installed, which I already have: XQuartz 2.7.6 (xorg-server 1.14.6)
+
+followed lazyfoo's guide and also the comment by Herk in the stackoverflow post.
+It didn't give me any weird compile errors.
+Can I just include freeglut.h in the project now?
