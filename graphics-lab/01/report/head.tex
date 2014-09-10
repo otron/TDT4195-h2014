@@ -1,0 +1,78 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc} % set input encoding to utf8
+
+
+%%% PACKAGES
+\usepackage{geometry}
+\geometry{a4paper}
+\usepackage{booktabs} % for much better looking tables
+\usepackage{graphicx} % support the \includegraphics command and options
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage[procnames]{listings} % for code segment environments.
+% see http://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+\usepackage{tikz} % for FSM drawings from http://madebyevan.com/fsm/
+\usepackage{qtree} % for \Tree
+\usepackage{float} % unlocks [H] for float-placement.
+\usepackage{subcaption} % unlocks the subfigure environment
+\usepackage{multirow} % allows columns and rows to span multiple rows and colums, respectively
+\usepackage{fancyhdr} % unlocks pagestyle 'fancy' and \[lcr](foot|head)
+\usepackage{fullpage}
+\usepackage{mathtools} % unlocks \DeclarePairedDelimiter
+\usepackage{amsfonts} % unlocks \mathbb{}
+\usepackage{color}
+\usepackage{tgheros}
+
+
+
+\definecolor{keywords}{RGB}{255,0,90}
+\definecolor{ids}{RGB}{0,0,113}
+\definecolor{red}{RGB}{160,0,0}
+\definecolor{comments}{RGB}{0,150,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+
+\lstdefinestyle{custompython}{
+	language=Python, 
+	basicstyle=\ttfamily\small, 
+	keywordstyle=\color{keywords},
+	commentstyle=\color{comments},
+	stringstyle=\color{red},
+	showstringspaces=false,
+	identifierstyle=\color{ids},
+	procnamekeys={def,class}
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray}
+}
+
+
+%\setcounter{secnumdepth}{3}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\renewcommand\thesubsection{\alph{subsection})} % changes the subsection numbering to %LETTER%)
+\renewcommand\thesubsubsection{\roman{subsubsection})} % changes the subsubsection numbering to %ROMAN%)
+\renewcommand\thesection{3.\arabic{section}} % changes the section numbering to 3.%NUMBER%
+
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+\input{titlepage.tex}
+
+%%% BEGIN DOCUMENT
+\begin{document}
+
+\newpage
+\maketitle
+%\tableofcontents* % the asterisk means that the contents itself isn't put into the ToC
+
+
+\input{body.tex}
+
+\end{document}
