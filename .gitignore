@@ -5,3 +5,8 @@
 
 # mac stuff
 .DS_STORE
+
+# LaTeX stuff
+*.aux
+*.log
+*.pdf
