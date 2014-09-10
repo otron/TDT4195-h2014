@@ -5,7 +5,7 @@ OBJS = main.cpp visuals.cpp
 OBJ_NAME = bin/01_hello_opengl
 
 # CC specifies which compiler to use
-CC = g++
+CC = gcc-4.8
 
 # INCLUDE_PATHS specifies the additional include paths required
 INCLUDE_PATHS = -I/usr/local/include -I/opt/X11/include
