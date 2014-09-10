@@ -1,5 +1,5 @@
 #include <GL/freeglut.h>
-#include <visual.cpp>
+#include <visuals.cpp>
 #include <visuals.h>
 
 void draw(void) {
