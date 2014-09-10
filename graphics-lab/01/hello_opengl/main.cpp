@@ -23,10 +23,14 @@ int main(int argc, char **argv) {
     //Create Window
     glutCreateWindow("Hello OpenGL");
 
+    // this does some setup stuff
     Setup();
 
     //Call to the drawing function
     glutDisplayFunc(Render);
+
+    // defines the function to be called on a window resize event
+    glutReshapeFunc(Resize);
 
 	// Loop require by OpenGL
     glutMainLoop();
