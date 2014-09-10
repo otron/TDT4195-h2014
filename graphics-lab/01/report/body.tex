@@ -1,0 +1,26 @@
+\section{} % Part 1
+Let's start with the main function.
+By the looks of it, I'd wager it performs some glut-related initialization based on whatever arguments the main function is given.
+\texttt{glutInitDisplayMode} probably does some display initialization with \texttt{GLUT\_RGBA} bitwised OR'd with \texttt{GLUT\_SINGLE} as its argument.
+
+The next three calls configure the window and set its initial position, size and title.
+The title-setting call's main function is possibly creating the window -- actually making it appear -- but with the argument passed it probably has the side-effect of setting the window's title.
+Or the argument might be for something completely different.
+
+The draw function is set as the drawing function for the display and then the main loop of glut is set in motion.
+
+The draw function draws a black background.
+
+\subsection{Setup}
+I did this on a Macbook Pro Retina 2013 (\texttt{MacBookPro11,1}) running \texttt{OS X 10.9.4 (13E28)} ``Mavericks''.
+\begin{itemize}
+    \item \texttt{freeglut-2.8.1}
+        \begin{itemize}
+            \item installed using homebrew
+        \end{itemize}
+    \item \texttt{gcc-4.8.3}
+    \item GNU Make 3.81
+\end{itemize}
+
+Vim was used for editing.
+The Makefile was copied from lazyfoo's OpenGL tutorial (the mac-with-terminal version)\footnote{\url{http://lazyfoo.net/tutorials/OpenGL/01_hello_opengl/mac/cli/index.php}}, with some alterations of my own.
