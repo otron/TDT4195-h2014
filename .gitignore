@@ -1,3 +1,7 @@
+*.zip
 
 # vim stuff
-.sw[po]
+*.sw[po]
+
+# mac stuff
+.DS_STORE
