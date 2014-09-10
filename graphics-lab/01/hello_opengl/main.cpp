@@ -2,16 +2,6 @@
 #include <stdio.h>
 #include "Visuals.h"
 
-void draw(void) {
-
-	// Black background
-	glClearColor(0.0f,0.0f,0.0f,1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    //Draw i
-    glFlush();
-
-}
-
 //Main program
 
 int main(int argc, char **argv) {
@@ -22,7 +12,7 @@ int main(int argc, char **argv) {
 	/    -RGB color model + Alpha Channel = GLUT_RGBA
 	/    -RGB color model + Alpha Channel = GLUT_RGBA
 	*/
-    glutInitDisplayMode(GLUT_RGBA|GLUT_SINGLE);
+    glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE);
 
     //Configure Window Postion
     glutInitWindowPosition(50, 25);
@@ -33,8 +23,10 @@ int main(int argc, char **argv) {
     //Create Window
     glutCreateWindow("Hello OpenGL");
 
+    Setup();
+
     //Call to the drawing function
-    glutDisplayFunc(draw);
+    glutDisplayFunc(Render);
 
 	// Loop require by OpenGL
     glutMainLoop();
