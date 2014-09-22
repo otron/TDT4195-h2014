@@ -11,3 +11,10 @@
 *.log
 *.pdf
 *.out
+
+# compiled stuff and cmake generated things
+CMakeCache.txt
+CMakeFiles/
+Makefile
+Hello_world_GL
+cmake_install.cmake
