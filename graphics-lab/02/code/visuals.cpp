@@ -187,7 +187,9 @@ void RenderScene1()
     glLoadIdentity();
 
     glColor3f(1.0, 0.5, 0.2);							   // Set drawing colour = orange
-    glutSolidCube(20.0 );							   // Draw a built-in primitive
+
+    // what do I know about what values these arguments should have, huh?
+    glutSolidTorus(10.0, 20.0, 50, 100);
 
 
 
@@ -216,6 +218,7 @@ void RenderScene3()
 }
 void RenderScene4()
 {
+    // using depreciated fixed pipeline to draw primitives
     glMatrixMode( GL_MODELVIEW );                                           // Switch to modelview matrix mode
     glLoadIdentity();                                                       // Load the identity matrix
 
@@ -272,6 +275,9 @@ void RenderScene4()
 
 void RenderScene5()
 {
+    // uses new OpenGL standard
+    // with shaders and VBO
+
     // Use our shader
     glUseProgram(programID);
 
@@ -347,6 +353,9 @@ void SetupGL() //
     // Create and compile our GLSL program from the shaders
     programID = LoadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
 
+
+    // "This triangle should take up most of your screen,
+    // unless it's transformed in some manner."
     //VBO
     static const GLfloat g_vertex_buffer_data[] = {
         -1.0f, -1.0f, 0.0f,
