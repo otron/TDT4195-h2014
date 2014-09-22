@@ -30,10 +30,16 @@ int main(int argc, char **argv) {
     int iScreenWidth = glutGet(GLUT_SCREEN_WIDTH);
     int iScreenHeight = glutGet(GLUT_SCREEN_HEIGHT);
 
+    int windowHeight = 512;
+    int windowWidth = 512;
+
+    int windowXPos = (iScreenWidth - windowWidth)/2;
+    int windowYPos = (iScreenHeight - windowHeight)/2;
+
     glutInitDisplayMode( GLUT_RGBA | GLUT_ALPHA | GLUT_DOUBLE | GLUT_DEPTH );
 
-    glutInitWindowPosition( 0,0 );
-    glutInitWindowSize( 512, 512 );
+    glutInitWindowPosition( windowXPos, windowYPos);
+    glutInitWindowSize( windowWidth, windowHeight);
 
     g_iGLUTWindowHandle = glutCreateWindow( "OpenGL" );
 
