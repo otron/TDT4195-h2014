@@ -364,7 +364,7 @@ void SetupGL() //
     static const GLfloat g_vertex_buffer_data[] = {
         -1.0f, -1.0f, 0.0f,
         1.0f, -1.0f, 0.0f,
-        0.0f,  1.0f, 0.0f,
+        1.0f,  1.0f, 0.0f,
     };
 
     // Generate 1 buffer, put the resulting identifier in vertexbuffer
