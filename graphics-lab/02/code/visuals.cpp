@@ -77,6 +77,12 @@ void KeyboardGL( unsigned char c, int x, int y )
         g_eCurrentScene = 5;
     }
         break;
+    case '6':
+    {
+        glClearColor( 0.7f, 0.7f, 0.7f, 1.0f );                      // Light-Gray background
+        g_eCurrentScene = 6;
+    }
+        break;
     case 's':
     case 'S':
     {
@@ -172,6 +178,11 @@ void DisplayGL()
     case 5:
     {
         RenderScene5();
+    }
+        break;
+    case 6:
+    {
+        RenderScene6();
     }
         break;
     }
@@ -302,6 +313,10 @@ void RenderScene5()
 
     glDisableVertexAttribArray(0);
 
+}
+
+void RenderScene6()
+{
 }
 
 
