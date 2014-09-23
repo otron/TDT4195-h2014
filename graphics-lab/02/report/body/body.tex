@@ -1,5 +1,38 @@
-This is a teeeeeessttttt
-\newpage
+\section{} % Everything.
 
+\subsection{Why's Scene 1-4 all weird like when viewed after rendering Scene 5?}
+Because the shaders are loaded in the body of RS5 and then never reset/unloaded/whatever, causing these shaders to be applied to Scenes 1 through 4 as well.
+The shaders somehow transform the objects and view.
 
-and I need to see what the second page looks like
+The shaders can be cleared/unloaded/reset/whatever by calling \texttt{glUseProgram(0)}.
+Placing such a call at the start of every other scene or before the switch in \texttt{DisplayGL()} fixes it.
+
+\subsection{Make the triangle in Scene 5 right-angled and also yellow.}
+To make it yellow instead of red we can change the color defined in \texttt{SimpleFragmentShader.fragmentshader} to \texttt{(1,1,0)}.
+
+I've got this tingling sensation that the idea was we make it right-angled by applying some transformation in the vertex shader.
+E.g. by translating the top vertex by \texttt{1.0f}.
+However I couldn't figure out how to do that.
+Actually I couldn't figure out much of the new pipeline.
+
+Anyway one way of making it right angled is changing the coordinates of the third vertex of \texttt{g\_vertex\_buffer\_data[]} to \texttt{1.0f, 1.0f, 0.0f}.
+
+\subsection{Create a new Scene and number it six in which five or more non-overlapping triangles are plotted.}
+I added a function and declared it in the header and did the things required so that pressing '6' would cause it to display.
+
+I used the old pipeline to render $n\times m$ red triangles using two nested for-loops.
+\texttt{glTranslate()} is used to make the next triangle appear below the previous triangle and also to reset the y-position and increase the x-position between columns.
+
+\section{Linux setup}
+This is the tl;dr version. I used the provided cmake file and vim to edit stuff.
+
+\begin{itemize}
+    \item \texttt{sudo apt-get install freeglut3-dev libxmu-dev libxi-dev}
+    \item downloaded and compiled GLEW from \url{http://glew.sourceforge.net/index.html}
+    \item Followed \url{http://wiki.cchtml.com/index.php/Ubuntu_Trusty_Installation_Guide} to get install OpenGL 4.x compatible drivers from AMD.
+    \item Had to create some symlinks to get stuff to work
+    \begin{itemize}
+        \item \texttt{sudo ln -s /usr/lib64/libGLEW.so.1.11 /usr/lib/x86\_64-linux-gnu/}
+        \item \texttt{sudo ln -s /usr/lib/fglrx/libGL.so /usr/lib/x86\_64-linux-gnu/}
+    \end{itemize}
+\end{itemize}
