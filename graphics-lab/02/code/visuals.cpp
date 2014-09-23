@@ -317,6 +317,37 @@ void RenderScene5()
 
 void RenderScene6()
 {
+    // gonna use the old pipeline for this
+    // Also I've copy-pasted stuff from RS4.
+    // using depreciated fixed pipeline to draw primitives
+    glMatrixMode( GL_MODELVIEW );                                           // Switch to modelview matrix mode
+    glLoadIdentity();                                                       // Load the identity matrix
+
+    int columns = 3;
+    int rows = 2;
+    float spacingY = -4.0;
+    float spacingX = 2.0;
+    #define redC 1.0f, 0.0f, 0.0f
+
+    for (int i = 0; i < columns; i++) {
+        for (int j = 0; j < rows; j++) {
+            glBegin( GL_TRIANGLES );
+
+            glColor3f(redC);
+            glVertex2f(0.0f, 1.0f);
+
+            glColor3f(redC);
+            glVertex2f(-1.0f, -1.0f);
+
+            glColor3f(redC);
+            glVertex2f(1.0f, -1.0f);
+
+            glEnd();
+
+            glTranslatef(0.f, spacingY, 0.0f);
+        }
+        glTranslatef(spacingX, -(rows*spacingY), 0.0f); // reset x position
+    }
 }
 
 
