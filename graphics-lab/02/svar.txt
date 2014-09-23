@@ -1,0 +1,41 @@
+hurr durr.
+RenderScene1 through 4 all just use whatever shader is currently active.
+RenderScene5 sets our custom shader to the currently active one.
+Since 1-4 doesn't reset this, they end up using our custom one which changes the view.
+
+Change RenderScene 5
+In SimpleFragmentShader.fragmentshader I changed the arguments to vec3() from (1f, 0, 0) to (1f, 1f, 0).
+
+RenderScene 6
+Added a case for 6 with a call to RenderScene6 in the switch statement in the DisplayGL function.
+Also in KeyboardGL().
+
+Declared RenderScene6() in visuals.h.
+
+MORE STUFF AND THINGS I DID 2014-09-22:
+
+1. Explain why RS1-4 are displayed incorrectly after enabling RS5.
+2. Change RS5
+    - it should plot a single right-angled triangle
+    - the triangle should be yellow
+3. Create RS6
+    - should contain 5 or more non-overlapping triangles
+
+# ANSWERS YO
+
+1. Because RS5 loads the shaders by calling `glUseProgram(programID)` which apparently does stuff to the view.
+These shaders then persist even after we switch away from RS5 because we don't unload them.
+Calling `glUseProgram(0)` clears/resets the shaders.
+Performing this call when the scene changes fixes the ``issue''.
+
+2a. To make it yellow we can change the color defined in `SimpleFragmentShader.fragmentshader` to `(1,1,0)`.
+2b. These are some of the ways we could do this.
+    a. Change the coordinates of the third vertex in `g_vertex_buffer_data[]` to `1.0f, 1.0f, 0.0f`.
+        I don't think that's how we're supposed to do it. Though it is a whole lot easier than figuring out how to transform it.
+    b. Transform the triangle somehow within RS5. Or could we do it with the shader?
+        Shit you don't even explain what a `vec3` is. Am I supposed to have to look up OpenGL and GLSL tutorials on the internet to figure this out or is it supposed to be doable in the two hours alloted for the weekly lab?
+        Screw it, I'll take the easy way out.
+
+3. I'm not going to use the new pipeline for this because I still don't understand how it works.
+Added a RenderScene6() function.
+Using the old pipeline to render n x m triangles, using glTranslate() to make the next one appear next to the previous triangle and to reset the x position between columns.
