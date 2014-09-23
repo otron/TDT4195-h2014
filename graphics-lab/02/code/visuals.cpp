@@ -143,6 +143,10 @@ void DisplayGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  // Clean up the colour of the window
     // and the depth buffer
 
+
+    // clear shaders
+    glUseProgram(0);
+
     switch ( g_eCurrentScene )
     {
     case 1:
