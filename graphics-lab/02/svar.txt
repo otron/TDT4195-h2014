@@ -39,3 +39,10 @@ Performing this call when the scene changes fixes the ``issue''.
 3. I'm not going to use the new pipeline for this because I still don't understand how it works.
 Added a RenderScene6() function.
 Using the old pipeline to render n x m triangles, using glTranslate() to make the next one appear next to the previous triangle and to reset the x position between columns.
+
+
+2014-09-26
+oh, right, the intended idea was to rotate the triangle -45, 90 or -/+ 180 degrees wasn't it?
+that seems like something you should be able to do with like one line in the vertex shader.
+OH WELL I GUESS I DUN GOOFED
+
