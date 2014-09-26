@@ -1,0 +1,22 @@
+# Stuff to do:
+
+1. Plot a cube of any color using 12 triangles.
+
+2. In RS1, rotate the cube in y.
+
+3. In RS2, rotate the cube in z at speed v1 and in y at speed v2 where v1 != v2.
+
+4. In RS3, copy RS2 and also rotate in z at v3 != v1.
+
+5. In RS4, translate the cube back and forth through z.
+
+6. In RS5, translate the cube back and forth in x and rotate it in x, y and z.
+
+# Doing stuff
+We start out with a triangle.
+
+What happens if I add another glDrawArrays() in RS1?
+Nothing, apparently. What's annoying is that they don't really explain how the new pipeline works.
+
+Oh hey, is VBO a Vertex Buffer Object?
+Is what I am supposed to do the exact same thing as described here http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/ ?
