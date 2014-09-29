@@ -20,3 +20,12 @@ Nothing, apparently. What's annoying is that they don't really explain how the n
 
 Oh hey, is VBO a Vertex Buffer Object?
 Is what I am supposed to do the exact same thing as described here http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/ ?
+
+Right there's some other stuff I need to include in the report as well:
+In scene 2, change the values of the projection matrix so you can understand what its components' roles are.
+    As the FOV decreases the triangle appears larger and closer, and as it increases the triangle seems to become smaller.
+    Up to a certain point, whereupon the face of the triangle covers the entire frame or becomes smaller than a pixel, respectively.
+
+    Changing the display range does nothing for this particular scene unless the range is changed so that the triangle's Z-coordinate does not fall within it.
+    Doing this causes the triangle to not be rendered in the scene.
+In scene 3, read online documentation about orthogonal projection and change some values and answer "What does each value represent?"
