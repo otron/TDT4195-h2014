@@ -18,7 +18,7 @@ GLuint vertexbuffer;
 GLuint programID_1, programID_2;
 
 int last_time, current_time;
-int translationCounter4, translationCounter5;
+float sign4, sign5;
 
 GLuint MatrixID; // Handler Matrix for moving the cam
 glm::mat4 MVP; // FInal Homogeneous Matrix
@@ -33,8 +33,8 @@ void Idle()
         rot_angle =0;
         Model      = glm::mat4(1.0f);
 
-        translationCounter4 = 0;
-        translationCounter5 = 0;
+        sign4 = 1.0f;
+        sign5 = 1.0f;
     }
     else
     {
@@ -84,11 +84,17 @@ void Idle()
         if (g_eCurrentScene == 4)
         {
             // translate in Z
-
-            Model = glm::translate(Model, glm::vec3(0, 0, 0.0001));
+            // flip the sign if its Z coordinate exceeds some bound
+            if (Model[3][2] < -1.0f) {
+                sign4 = sign4*(-1.0f);
+            }
+            if (Model[3][2] > 1.0f) {
+                sign4 = sign4*(-1.0f);
+            }
+            Model = glm::translate(Model, glm::vec3(0, 0, sign4*0.001));
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
-                    std::cout << Model[i][j] << "\t";
+                    std::cout << float(Model[i][j]) << "\t\t";
                 }
                 std::cout << std::endl;
             }
