@@ -45,6 +45,7 @@ void Idle()
             std::cout << "ang: " <<float(rot_angle*dt)  << std::endl;
             Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0,1,0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
         }
+
         if (g_eCurrentScene == 1)
         {
             // rotate the cube in y
@@ -52,6 +53,7 @@ void Idle()
             std::cout << "ang: " << float(rot_angle*dt) << std::endl;
             Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0, 1, 0));
         }
+
         if (g_eCurrentScene == 2)
         {
             // rotate the cube in Z and Y at two different speeds
@@ -67,6 +69,7 @@ void Idle()
             rot_angle = rot_angle * 2;
             Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0, 1, 0));
         }
+
         if (g_eCurrentScene == 3)
         {
             // Rotate it in X+Y+Z in 3 different speeds.
@@ -81,6 +84,16 @@ void Idle()
             // in Z!
             rot_angle = rot_angle/2.0f;
             Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0, 0, 1));
+        }
+
+        if (g_eCurrentScene == 4)
+        {
+            // translate the cube back and forth in Z
+        }
+
+        if (g_eCurrentScene == 5)
+        {
+            // translate the cube back and forth in X and rotate in XYZ
         }
     }
     glutPostRedisplay();
