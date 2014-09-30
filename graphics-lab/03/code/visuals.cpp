@@ -18,6 +18,7 @@ GLuint vertexbuffer;
 GLuint programID_1, programID_2;
 
 int last_time, current_time;
+int translationCounter4, translationCounter5;
 
 GLuint MatrixID; // Handler Matrix for moving the cam
 glm::mat4 MVP; // FInal Homogeneous Matrix
@@ -31,21 +32,15 @@ void Idle()
     {
         rot_angle =0;
         Model      = glm::mat4(1.0f);
+
+        translationCounter4 = 0;
+        translationCounter5 = 0;
     }
     else
     {
         int dt = current_time - last_time;
 
         /* Compute animation here*/
-        if (g_eCurrentScene == 4)
-        {
-            // rotation speed is 60 degrees per second = .06 per ms;
-
-            rot_angle =0.06;
-            std::cout << "ang: " <<float(rot_angle*dt)  << std::endl;
-            Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0,1,0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
-        }
-
         if (g_eCurrentScene == 1)
         {
             // rotate the cube in y
@@ -88,7 +83,16 @@ void Idle()
 
         if (g_eCurrentScene == 4)
         {
-            // translate the cube back and forth in Z
+            // translate in Z
+
+            Model = glm::translate(Model, glm::vec3(0, 0, 0.0001));
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    std::cout << Model[i][j] << "\t";
+                }
+                std::cout << std::endl;
+            }
+            std::cout << std::endl;
         }
 
         if (g_eCurrentScene == 5)
@@ -423,8 +427,6 @@ void RenderScene4()
 
 void RenderScene5()
 {
-
-
 }
 
 

@@ -60,3 +60,10 @@ Nope, simply adding a clause for g_currentscene == 2 doesn't make the cube in RS
 Cube should be rotating in y in RS1, but it's too close for the effect to be noticeable.
 Well this wasn't so difficult, now that I've figured out how to do it.
 
+Hm, so I've got half the "back and forth" part of the translation working.
+How do I get it to reverse its direction after some amount of time?
+I could count the distance it travels and swap the sign on the speed when it exceeds some amount.
+Or I could check its position in the axis I'm translating it through and reverse the sign if it's past some value.
+Can't figure out how to get its position in a given axis though. Counter it is!
+
+Wait no, through trial and error and printing out the entire 4x4 matrix each frame as it is translated through Z I've deduced that the Z-coordinate is in Model[3][3].
