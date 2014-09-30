@@ -230,7 +230,7 @@ void RenderScene1()
                 );
 
     // Draw the triangle !
-    glDrawArrays(GL_TRIANGLES, 0, 3); // Index, 0,1,2 (total of 3) -> 1 triangle
+    glDrawArrays(GL_TRIANGLES, 0, 12*3); // Index, number of triangles in our cube
 
     glDisableVertexAttribArray(0);
 
@@ -242,6 +242,7 @@ void RenderScene2()
     // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 
     Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+    //Projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,10.0f,100.0f);
 
     // Camera matrix
     View       = glm::lookAt(
@@ -275,7 +276,7 @@ void RenderScene2()
                 );
 
     // Draw the triangle !
-    glDrawArrays(GL_TRIANGLES, 0, 3); // Index, 0,1,2 (total of 3) -> 1 triangle
+    glDrawArrays(GL_TRIANGLES, 0, 12*3); // Index, number of triangles in our cube
 
     glDisableVertexAttribArray(0);
 
@@ -319,7 +320,7 @@ void RenderScene3()
                 );
 
     // Draw the triangle !
-    glDrawArrays(GL_TRIANGLES, 0, 3); // Index, 0,1,2 (total of 3) -> 1 triangle
+    glDrawArrays(GL_TRIANGLES, 0, 12*3); // Index, number of triangles in our cube
 
     glDisableVertexAttribArray(0);
 
@@ -362,7 +363,7 @@ void RenderScene4()
                 );
 
     // Draw the triangle !
-    glDrawArrays(GL_TRIANGLES, 0, 3); // Index, 0,1,2 (total of 3) -> 1 triangle
+    glDrawArrays(GL_TRIANGLES, 0, 12*3); // Index, number of triangles in our cube
 
     glDisableVertexAttribArray(0);
 
@@ -429,11 +430,44 @@ void SetupGL() //
     programID_1 = LoadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
     programID_2 = LoadShaders( "SimpleTransform.vertexshader", "SimpleFragmentShader.fragmentshader" );
 
-    //VBO
-    static const GLfloat g_vertex_buffer_data[] = {
-        -1.0f, -1.0f, 0.0f,
-        1.0f, -1.0f, 0.0f,
-        0.0f,  1.0f, 0.0f,
+    //VBO -- Vertex buffer object or whatever the thing is that holds the coordinates of the vertices
+	static const GLfloat g_vertex_buffer_data[] = {
+		-1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		 1.0f, 1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f,-1.0f,
+		 1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f,-1.0f,
+		 1.0f,-1.0f,-1.0f,
+		 1.0f, 1.0f,-1.0f,
+		 1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f,-1.0f,
+		 1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f,-1.0f, 1.0f,
+		 1.0f,-1.0f, 1.0f,
+		 1.0f, 1.0f, 1.0f,
+		 1.0f,-1.0f,-1.0f,
+		 1.0f, 1.0f,-1.0f,
+		 1.0f,-1.0f,-1.0f,
+		 1.0f, 1.0f, 1.0f,
+		 1.0f,-1.0f, 1.0f,
+		 1.0f, 1.0f, 1.0f,
+		 1.0f, 1.0f,-1.0f,
+		-1.0f, 1.0f,-1.0f,
+		 1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		 1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		 1.0f,-1.0f, 1.0f
     };
 
     // Generate 1 buffer, put the resulting identifier in vertexbuffer

@@ -36,3 +36,8 @@ In scene 3, read online documentation about orthogonal projection and change som
     I'm not sure what that last bit means, exactly.
 
 Okay let's draw a fukken cube!
+
+Well look at that we've drawn a cube.
+Admittedly I copied the code from http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/, but whatever.
+It's solid red. Hard to tell that it's actually spinnin'. I wonder if there's some easy way I can gradient its surface?
+Alternatively I could spend 20 minutes manually coloring the vertices.
