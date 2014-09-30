@@ -26,6 +26,13 @@ In scene 2, change the values of the projection matrix so you can understand wha
     As the FOV decreases the triangle appears larger and closer, and as it increases the triangle seems to become smaller.
     Up to a certain point, whereupon the face of the triangle covers the entire frame or becomes smaller than a pixel, respectively.
 
-    Changing the display range does nothing for this particular scene unless the range is changed so that the triangle's Z-coordinate does not fall within it.
-    Doing this causes the triangle to not be rendered in the scene.
+    Changing the display range changes the depth of the projection box/convex shape/whatever.
+    Its base is at wherever the camera is, which in this case is at the coordinates defined by the first vec3-argument to the `lookAt-function` used to define the Camera/View matrix.
+
 In scene 3, read online documentation about orthogonal projection and change some values and answer "What does each value represent?"
+    glm::ortho eh?
+    The first two pairs of arguments define the size of the projection plane: The pairs are points on the x-axis and y-axis respectively.
+    The last two arguments are optional (but we need either both or none) and define near and far z-values.
+    I'm not sure what that last bit means, exactly.
+
+Okay let's draw a fukken cube!
