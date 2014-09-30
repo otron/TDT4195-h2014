@@ -68,3 +68,8 @@ Can't figure out how to get its position in a given axis though. Counter it is!
 
 Wait no, through trial and error and printing out the entire 4x4 matrix each frame as it is translated through Z I've deduced that the Z-coordinate is in Model[3][2].
 Yeah, I derped and figured it was [3][3] first because I didn't think.
+
+And the X coordinate is in [3][0]
+
+It looks like it's being rotated and translated about its own reference system rather than the WS.
+Oh well. I bet it'll do.
