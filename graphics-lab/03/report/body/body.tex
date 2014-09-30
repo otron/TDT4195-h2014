@@ -1,0 +1,33 @@
+\section{Lab-stuff}
+I changed the values of the projection matrix in RS2 as instructed:
+
+As the FOV decreases the triangle appears larger and closer, and as it increases the triangle seems to become smaller.
+Up to a certain point, whereupon the face of the triangle covers the entire frame or becomes smaller than a pixel, respectively.
+
+Changing the display range changes the depth of the projection box/convex shape/whatever.
+Its base is at wherever the camera is, which in this case is at the coordinates defined by the first vec3-argument to the `lookAt-function` used to define the Camera/View matrix.
+
+And then there was the question about what the values of the glm::ortho function \textit{represented}:
+
+The first two pairs of arguments define the size of the projection plane: The pairs are points on the x-axis and y-axis respectively.
+The last two arguments are optional (but we need either both or none) and define near and far z-values.
+I'm not sure what that last bit means, exactly.
+
+\section{Homework}
+This is the bit where we had to make the cube and then make it spin and stuff, yeah.
+
+I'm going to be honest with you: I lifted the code for the cube off the internet.
+Specifically from this site: \url{http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/}.
+I hope we can still be friends and that the major point of this lab assignment was actually not to figure out the coordinates of the 36 vertices required to make a cube but rather the whole bit about rotation and translation and such.
+
+To get the cube to move about in each scene I copied the if-clause in Idle() in visuals.cpp.
+Getting the various rotations right was just a matter of tweaking the supplied code and applying it sequentually with different values (for rotation through multiple axis).
+
+Translation itself was just a matter of finding out what kind of arguments glm::translate() accepted.
+The ``back and forth'' part of it was trickier -- How could I detect when the cube had moved sufficiently in a direction?
+After some thinking I printed the entire Model-matrix to the console at each frame and looked at which values changed as it was translated through a dimension.
+The first through third columns (?) -- the second argument to the square bracked access operator -- correspond to the model's X, Y and Z coordinates respectively.
+I then added a variable representing the direction of the translation (a float that's either -1.0f or 1.0f) and flips its sign whenever the cube exceeds some value in a given axis.
+This causes the cube to translate to a certain point, reverse its direction and continue the translation (in the opposite direction) before repeating the process.
+
+In RS5, when all the rotations and the translation are happening all at once it seems like the translation is being applied with respect to the cube's coordinate system rather than the world's -- the direction of the translation changes as it rotates.
