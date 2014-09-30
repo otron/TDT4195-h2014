@@ -41,3 +41,22 @@ Well look at that we've drawn a cube.
 Admittedly I copied the code from http://www.opengl-tutorial.org/beginners-tutorials/tutorial-4-a-colored-cube/, but whatever.
 It's solid red. Hard to tell that it's actually spinnin'. I wonder if there's some easy way I can gradient its surface?
 Alternatively I could spend 20 minutes manually coloring the vertices.
+I'm going to wait with the coloring.
+
+Let's look at what's happening in RS4 and copy the rotation code from there, eh?
+Well I found the line responsible for the rotation but yeah. It's just one line and doesn't make any sense to me right now.
+
+According to http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-17-quaternions/ it seems like I need to apply a rotation matrix to the model.
+Now since the model is initially static and shared between the scenes I'd have to save it somehow between frames, otherwise it'd get reset to its initial position between each frame and would appear static.
+Not a problem, but perhaps that's not the intended solution?
+
+Oh, no, lol.
+There's an if-else in Idle() which performs the rotation using euler angles.
+I could add clauses for the various scenes there to make it rotate as requested.
+
+Nope, simply adding a clause for g_currentscene == 2 doesn't make the cube in RS2 rotate.
+
+# ANS
+Cube should be rotating in y in RS1, but it's too close for the effect to be noticeable.
+Well this wasn't so difficult, now that I've figured out how to do it.
+

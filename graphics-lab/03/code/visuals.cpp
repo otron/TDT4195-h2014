@@ -45,6 +45,28 @@ void Idle()
             std::cout << "ang: " <<float(rot_angle*dt)  << std::endl;
             Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0,1,0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
         }
+        if (g_eCurrentScene == 1)
+        {
+            // rotate the cube in y
+            rot_angle = 0.0002;
+            std::cout << "ang: " << float(rot_angle*dt) << std::endl;
+            Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0, 1, 0));
+        }
+        if (g_eCurrentScene == 2)
+        {
+            // rotate the cube in Z and Y at two different speeds
+            // rotate in Z
+            rot_angle = 0.0001;
+            std::cout << "ang: " << float(rot_angle*dt) << std::endl;
+            Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0, 0, 1));
+
+            // rotate in Y
+            // this is really lazy I know, but I just can't be arsed to manually
+            // declare different rotation angle speeds because CPP feels like a chore
+            // these days y'know? Anyway, tell mom I love her.
+            rot_angle = rot_angle * 2;
+            Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0, 1, 0));
+        }
     }
     glutPostRedisplay();
 
@@ -251,7 +273,8 @@ void RenderScene2()
                 glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
                 );
     // Model matrix : an identity matrix (model will be at the origin)
-    Model      = glm::mat4(1.0f);
+    // Nope, we're letting idle() update it so it'll rotate biz yo.
+//    Model      = glm::mat4(1.0f);
     // Our ModelViewProjection : multiplication of our 3 matrices
     MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
 
@@ -325,6 +348,7 @@ void RenderScene3()
     glDisableVertexAttribArray(0);
 
 }
+
 void RenderScene4()
 {
 
