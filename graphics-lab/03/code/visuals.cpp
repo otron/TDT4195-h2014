@@ -92,18 +92,19 @@ void Idle()
                 sign4 = sign4*(-1.0f);
             }
             Model = glm::translate(Model, glm::vec3(0, 0, sign4*0.001));
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
-                    std::cout << float(Model[i][j]) << "\t\t";
-                }
-                std::cout << std::endl;
-            }
-            std::cout << std::endl;
         }
 
         if (g_eCurrentScene == 5)
         {
             // translate the cube back and forth in X and rotate in XYZ
+            // flip the sign if its X coordinate exceeds some bound
+            if (Model[3][0] < -1.0f) {
+                sign4 = sign4*(-1.0f);
+            }
+            if (Model[3][0] > 1.0f) {
+                sign4 = sign4*(-1.0f);
+            }
+            Model = glm::translate(Model, glm::vec3(sign4*0.001, 0, 0));
         }
     }
     glutPostRedisplay();
