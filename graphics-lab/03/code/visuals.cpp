@@ -67,6 +67,21 @@ void Idle()
             rot_angle = rot_angle * 2;
             Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0, 1, 0));
         }
+        if (g_eCurrentScene == 3)
+        {
+            // Rotate it in X+Y+Z in 3 different speeds.
+            // in X!
+            rot_angle = 0.00005;
+            Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(1, 0, 0));
+
+            // in Y!
+            rot_angle = rot_angle*3.0f;
+            Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0, 1, 0));
+
+            // in Z!
+            rot_angle = rot_angle/2.0f;
+            Model = glm::rotate(Model, float(rot_angle*dt), glm::vec3(0, 0, 1));
+        }
     }
     glutPostRedisplay();
 
@@ -318,7 +333,7 @@ void RenderScene3()
                 glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
                 );
     // Model matrix : an identity matrix (model will be at the origin)
-    Model      = glm::mat4(1.0f);
+    //Model      = glm::mat4(1.0f);
     // Our ModelViewProjection : multiplication of our 3 matrices
     MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
 
