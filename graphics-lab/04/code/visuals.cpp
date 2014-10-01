@@ -34,6 +34,7 @@ glm::mat4 MVP; // FInal Homogeneous Matrix
 
 glm::mat4 MVP1,MVP2,MVP3,MVP4,MVP5, MODEL_EVERYTHING, MODEL_LEG_1, MODEL_LEG_2;
 glm::mat4 Projection,View,Model;
+glm::mat4 MODEL_HJ_1, MODEL_HJ_2;
 
 // Variables for moving camera with mouse
 int mouse_x = 800/2;
@@ -170,11 +171,9 @@ void Idle()
         counter =counter+0.002*dt;
         MODEL_EVERYTHING = glm::translate(MODEL_EVERYTHING,glm::vec3(0,0,0.0013*counter));
 
+        MODEL_HJ_1 = glm::rotate(MODEL_HJ_1,float(cos(counter)),glm::vec3(1,0,0));
 
-        MODEL_LEG_1 = glm::rotate(MODEL_LEG_1,float(cos(counter)),glm::vec3(1,0,0));
-
-
-        MODEL_LEG_2 = glm::rotate(MODEL_LEG_2,float(-cos(counter)),glm::vec3(1,0,0));
+        MODEL_HJ_2 = glm::rotate(MODEL_HJ_2,float(-cos(counter)),glm::vec3(1,0,0));
 
     }
     last_time =current_time;// update when the last timer;
@@ -247,6 +246,9 @@ void KeyboardGL( unsigned char c, int x, int y )
 
         // THIS MODEL WILL BE APPLIED TO LEG 2
         MODEL_LEG_2=glm::mat4(1.0f);
+
+        MODEL_HJ_1 = glm::mat4(1.0f);
+        MODEL_HJ_2 = glm::mat4(1.0f);
     }
         break;
     case 's':
@@ -597,7 +599,7 @@ void RenderScene5()
     Model      = glm::translate(glm::mat4(1.0f),glm::vec3(-1,0,0));
     Model      = glm::scale(Model,glm::vec3(0.2,0.2,0.2));
     // MVP
-    MVP2        = Projection * View * MODEL_EVERYTHING * Model;
+    MVP2        = Projection * View * MODEL_EVERYTHING * MODEL_HJ_1 * Model;
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP2[0][0]);
     // Draw the trinagles
     glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
@@ -608,7 +610,7 @@ void RenderScene5()
     Model      = glm::translate(glm::mat4(1.0f),glm::vec3(1,0,0));
     Model      = glm::scale(Model,glm::vec3(0.2,0.2,0.2));
     // MVP
-    MVP3        = Projection * View * MODEL_EVERYTHING * Model;
+    MVP3        = Projection * View * MODEL_EVERYTHING * MODEL_HJ_2 * Model;
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP3[0][0]);
     // Draw the trinagles
     glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
@@ -620,7 +622,7 @@ void RenderScene5()
     Model      = glm::scale(Model,glm::vec3(1,0.1,0.1));
     Model      = glm::translate(Model,glm::vec3(-1,10,0));
     // MVP
-    MVP4        = Projection * View * MODEL_EVERYTHING* MODEL_LEG_1* Model;
+    MVP4        = Projection * View * MODEL_EVERYTHING* MODEL_HJ_1 * MODEL_LEG_1* Model;
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP4[0][0]);
     // Draw the trinagles
     glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
@@ -632,7 +634,7 @@ void RenderScene5()
     Model      = glm::scale(Model,glm::vec3(1,0.1,0.1));
     Model      = glm::translate(Model,glm::vec3(1,10,0));
     // MVP
-    MVP5        = Projection * View *MODEL_EVERYTHING* MODEL_LEG_2* Model;
+    MVP5        = Projection * View *MODEL_EVERYTHING* MODEL_HJ_2 * MODEL_LEG_2* Model;
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP5[0][0]);
     // Draw the trinagles
     glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
@@ -673,8 +675,8 @@ void SetupGL() //
     glutKeyboardFunc(KeyboardGL);
     glutSpecialFunc(Specialkey);
     glutReshapeFunc(ReshapeGL);
-    glutMouseFunc(MouseGL);
-    glutMotionFunc(Mouse_active);
+    glutMouseFunc(MouseGL); // callbacks talked about on slide 16
+    glutMotionFunc(Mouse_active); // yeah this one too
 
     //Call to the drawing function
     glutIdleFunc(Idle);
