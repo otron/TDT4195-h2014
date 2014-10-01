@@ -419,6 +419,8 @@ void RenderScene2()
                 );
     // Model matrix : an identity matrix (model will be at the origin)
     Model      = glm::mat4(1.0f);
+    Model      = glm::rotate(Model, 180.0f, glm::vec3(0, 0, 1));
+    Model      = glm::scale(Model, glm::vec3(0.1, 1, 0.1));
     // Our ModelViewProjection : multiplication of our 3 matrices
     MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
     // Use our shader
@@ -433,7 +435,7 @@ void RenderScene2()
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbufferPyramid);
     glVertexAttribPointer(
                 0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
                 3,                  // size
@@ -456,7 +458,7 @@ void RenderScene2()
                 );
 
     // Draw the triangles
-    glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
+    glDrawArrays(GL_TRIANGLES, 0, 7*3); // 12*3 indices starting at 0 -> 12 triangles
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
 }
@@ -615,30 +617,47 @@ void RenderScene5()
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP3[0][0]);
     // Draw the trinagles
     glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
+
     // =================================================================================
     // ========== LEG 1
     // =================================================================================
     // transform the cube
-    Model      = glm::rotate(glm::mat4(1.0f),90.0f,glm::vec3(0,0,1));
-    Model      = glm::scale(Model,glm::vec3(1,0.1,0.1));
-    Model      = glm::translate(Model,glm::vec3(-1,10,0));
+    Model      = glm::rotate(glm::mat4(1.0f),180.0f,glm::vec3(0,0,1));
+    Model      = glm::scale(Model,glm::vec3(0.1,1,0.1));
+    Model      = glm::translate(Model,glm::vec3(10,1,0));
     // MVP
     MVP4        = Projection * View * MODEL_EVERYTHING* MODEL_HJ_1 * MODEL_LEG_1* Model;
+
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP4[0][0]);
+
+    // load our pyramid into the buffer AW YESSS
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbufferPyramid);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
     // Draw the trinagles
-    glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
+    glDrawArrays(GL_TRIANGLES, 0, 7*3); // 12*3 indices starting at 0 -> 12 triangles
     // =================================================================================
     // ========== LEG 2
     // =================================================================================
-    // Transform the cube
-    Model      = glm::rotate(glm::mat4(1.0f),-90.0f,glm::vec3(0,0,1));
-    Model      = glm::scale(Model,glm::vec3(1,0.1,0.1));
-    Model      = glm::translate(Model,glm::vec3(1,10,0));
+    // reset and transform the model
+    Model      = glm::rotate(glm::mat4(1.0f),-180.0f,glm::vec3(0,0,1));
+    Model      = glm::scale(Model,glm::vec3(0.1,1,0.1));
+    Model      = glm::translate(Model,glm::vec3(-10,1,0));
     // MVP
     MVP5        = Projection * View *MODEL_EVERYTHING* MODEL_HJ_2 * MODEL_LEG_2* Model;
+
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP5[0][0]);
     // Draw the trinagles
-    glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
+    glDrawArrays(GL_TRIANGLES, 0, 7*3); // 12*3 indices starting at 0 -> 12 triangles
+
+
+    // FOOT 1
+
+
+
+    // FOOT 2
+
+
     //END
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
