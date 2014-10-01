@@ -65,6 +65,11 @@ void MouseGL(int button, int state, int x, int y)
 
         // move point to the midle of screen
         glutWarpPointer(800/2, 600/2);
+
+        // this only happens once, when the mouse is first pressed.
+        // If the mouse isn't centered when pressed (which enables moving the camera)
+        // then the camera starts moving immediately towards the mouse giving the user
+        // a feeling that everything has gone terribly wrong and a sense of losing control.
     }
     else
     {
@@ -739,6 +744,7 @@ void SetupGL() //
         -1.0f, 1.0f, 1.0f,
         1.0f,-1.0f, 1.0f
     };
+
     static const GLfloat g_color_buffer_data[] = {
         0.583f,  0.771f,  0.014f,
         0.609f,  0.115f,  0.436f,
