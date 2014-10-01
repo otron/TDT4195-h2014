@@ -39,3 +39,9 @@ Through trial and error I managed to scale them to a passable size and shape.
 Figuring out the translation matrix was also done through trial and error.
 
 \subsection{Change the color of objects.}
+
+I created one colorbuffer for each color, copy pasting the existing one but renaming stuff.
+I found the RGB values for the colors using \url{http://www.rapidtables.com/web/color/RGB_Color.htm}.
+I divided the HEX (0-255) value of each color by 255 to find the appropriate 0-1 value.
+The appropriate colorbuffer is bound before each limb is drawn.
+

@@ -124,3 +124,37 @@ Well at least they can be cubes.
 And now that's done.
 I just re-loaded the original vertexbuffer after doing the legs and then copied the steps like it's done for the other objects.
 I experimented through trial and error until I got something that looked about right, this took somewhere between 5 and 15 minutes.
+
+# COLORS
+So if I create a 12*3 GLfloat thing like the color buffer but with the same color on every line then the entire thing is rendered in that color.
+So all I need are 4 such buffers with different colors.
+And then I need to load them at the right time as well. I mean, at the right place in the code.
+Gotta swap those buffers, y'know?
+Right so I'm using http://www.rapidtables.com/web/color/RGB_Color.htm to pick a color.
+To find the float values needed I divide the integer value given by the picker thing by 255.
+
+RED     = 0.8f, 0.0f, 0.0f
+YELLOW  = 1.0f, 1.0f, 0.2f
+BLUE    = 0.0f, 0.5f, 1.0f
+GREEN   = 0.0f, 0.6f, 0.3f
+
+Red = colorbufferRed
+yellow = colorbufferYellow
+and so on
+
+Hmm, regardless of which colorbuffer I bind it all renders as red
+Shouldn't the interpolation of two equal values equal the value?
+Yeah, I just forgot to add /g on my substitution command when I copied the code from red.
+You didn't specify what color the feet should be so I made them the same color as their leg.
+This required that I expand the yellow and blue color buffers as they originally only had 21 color values -- the number required for the four faced pyramid.
+
+
+# make the camera follow the...
+no. I've spent more than 6 hours on this.
+90% of that time was devoted to OpenGL, which isn't even a part of the course's curriculum.
+I don't mind learning OpenGL, I just don't have unlimited free time.
+Fuck this.
+
+Here's some feedback I'm writing down so I don't forget it:
+Doesn't make sense to have mandatory assignments that take upwards of 10 hours each, of which 90% is spent figuring out a framework/library/technology that isn't part of the course's curriculum and not listed as something you need to know to be eligible for the course.
+Theory exercises from the book would pack a better ratio of directly applicable/relevant knowledge to time invested.
