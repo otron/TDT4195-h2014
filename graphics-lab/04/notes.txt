@@ -67,4 +67,60 @@ Oh it's because you guys have hooked LEG_1 to HIP JOINT 2 and LEG_2 to HIP JOINT
 Way to go!
 Swapped the translation definitions for HJ1 and 2 -- i.e. multiplied the vector by -1 or whatever. It works now.
 
+# Replace the LEGS by a new model
+which must have feet and cannot be a scaled or modified cube
+... well fuck you, too.
+What does that even mean?
+Can I just add feet below the legs and hook them up to the hierarchy? The legs model then includes the feet and is no longer just a scaled cube.
+Or do I have to replace the existing legs with something that's not a cube and then add feet seperately?
 
+Ungh, the model has to be defined as a set of points in the VBO.
+Google, here I come. Unless I can just make a pyramid like thing?
+Yeah let's just make a pyramid.
+I can define the pyramid with 5 points.
+I need two triangles for the bottom and one for each face for a total of 7 triangles.
+Here are the triangles I think:
+-1, -1, 1
+-1, -1, -1
+1, -1, 1
+
+-1, -1, -1
+1, -1, -1
+1, -1, 1
+
+-1, -1, 1
+-1, -1, -1
+0, 1, 0
+
+-1, -1, 1
+1, -1, 1
+0, 1, 0
+
+1, -1, 1
+1, -1, -1
+0, 1, 0
+
+1, -1, -1
+-1, -1, -1
+0, 1, 0
+
+Can't figure out how to draw it instead of the leg.
+Holy crap I did make a pyramid.
+To get it to render in scene 2 all I had to do was reduce the last argument in glDrawArrays and also bind the buffer to the right vertexbuffer
+Oh and yeah, that works in RS5 as well.
+It just looked all derpy with the transformations.
+
+Well all right, the legs are now pyramids!
+I just derped the herp a bit. Also gotta rotate 'em 180 degrees instead of 90.
+Aw but then the scaling goes off.
+Fixed the scaling, now I gotta fix the translation.
+And done. Trial and error, that's how I did it.
+
+They look like two dimensional cutouts though. Perhaps the BFC is messing shit up?
+Yup, disabled it.
+Sigh, and now I've gotta add feet as well?
+
+Well at least they can be cubes.
+And now that's done.
+I just re-loaded the original vertexbuffer after doing the legs and then copied the steps like it's done for the other objects.
+I experimented through trial and error until I got something that looked about right, this took somewhere between 5 and 15 minutes.
