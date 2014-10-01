@@ -1,0 +1,160 @@
+aw yes poof bam slam damn jam get up and down with the flow and the hoe cut that grass get that grain make some bread to feed your brain
+//ain't nothing but a thug lyfe//
+
+Let's start by reading through the presentation to get an idea of what the lab is about.
+Then I'll see if the answer is available in one of the tutorials on opengl-tutorial.org.
+
+First up it talks about back face culling and z-depth.
+It even uses the same cube as tutorial 4 to illustrate what happens when GL_DEPTH_TEST is disabled, which it is by default.
+There's got to exist some library out there that is more suited for this teaching purpose than OpenGL, considering the purpose isn't to learn OpenGL but rather to see how the theoretical principles we've learned are implemented.
+OpenGL has a lot of overhead which isn't relevant to that at all.
+It takes me longer to figure out how I'm supposed to do something in OpenGL and the enclosing C++ or GLSL than figuring out which transformations or operations or things I want to do.
+
+Next up is Mouse Handling.
+glutMouseFunc(arg) -> arg becomes the mouse callback for the current window.
+Each press and each release generates a mouse callback.
+
+glutMotionFunc(arg) -> arg becomes the callback that handles mouse motion while buttons are being pressed.
+Wait, so it's only called if the mouse is moved WHILE a mouse button is pressed down?
+I'm gonna download the project and compile it and see what happens.
+It runs without issue. Scene 1-4 contains a cube. Back face culling happens in RS2-4, but not in 1.
+Switching from 2 or 3 to 1 displays the cube in 1 without BFC, but changing from scene 4 to 1 causes it to be rendered *with* BFC. Strange.
+
+Also yeah, the glutMotionFunc thing only reacts while a mouse button is pressed down.
+The callbacks are actually defined in visuals.cpp, and aren't just some builtin magic bullshit.
+I feel like mentioning that would clear up a great deal of confusion, but then again I could just look for it myself by oh I don't know running grep -rinH . "whatever" and see what turns up.
+
+Next up in the presentation is "Hierarchical modeling".
+Several objects all a part of one model or another object or whatever in a hierarchical tree-like structure where transformations applied to a member is applied to its children as well and with respect to the parent's CS.
+
+"keyboard special keys such as Fx or Up, Down, etc"
+That doesn't tell me much. Like, what are the non-special keys? Is space a regular key? What about return?
+
+How are mouse_x and y used to animate the scenes 3-5? All they're used for is calculating where to move the camera. Is camera movement considered a part of the animation?
+
+BFC is explicitly disabled in RS3, while the depth test is not.
+RS4 enables both the depth test and BFC.
+So that's why RS1 looks correct after rendering RS4 -- the only way to re-disable BFC is by loading RS3.
+
+The thing in RS5's speed is proportional to how long the scene has been active.
+
+First up I have to rotate the hip joints like the legs.
+Time to look for some tutorials.
+Nope, this one isn't lifted straight from opengl-tutorials.org.
+Hmmm.
+
+# Rotate them hip joints son
+Can I just copy the code for the legs and do the exact same thing with the hip joints?
+Or am I supposed to apply the rotation to the hip joints instead, which'll cause the legs to move because the legs are children of the hips?
+
+"HIP" is the paralleliped that connects the hip joints.
+Hip joint 1 and 2 are the cubes on the intersection of HIP and LEG 1 and 2.
+How is the hierarchy defined in the code?
+Okay they just add the MODEL_EVERYTHING matrix into the mix (definition of MVP).
+To make the HJ rotate I could apply the rotation transformation to the HIP JOINTS instead and define the MVP for legs as
+Projection * View * MODEL_EVERYTHING * MODEL_HJ_n * MODEL_LEG_n * Model
+
+I'll try defining MODEL_HJ_1 and 2 just like what they've done with MODEL_LEG_1 and 2 and see if it works
+Right I have to declare them in the header file as well? Ungh.
+Nope! Just had a typo.
+And that didn't work.
+
+Oh, forgot to add the models to the hip joint MVPs.
+The hip joints and legs are rotating in the opposite direction now.
+That's weird.
+
+Oh it's because you guys have hooked LEG_1 to HIP JOINT 2 and LEG_2 to HIP JOINT 1.
+Way to go!
+Swapped the translation definitions for HJ1 and 2 -- i.e. multiplied the vector by -1 or whatever. It works now.
+
+# Replace the LEGS by a new model
+which must have feet and cannot be a scaled or modified cube
+... well fuck you, too.
+What does that even mean?
+Can I just add feet below the legs and hook them up to the hierarchy? The legs model then includes the feet and is no longer just a scaled cube.
+Or do I have to replace the existing legs with something that's not a cube and then add feet seperately?
+
+Ungh, the model has to be defined as a set of points in the VBO.
+Google, here I come. Unless I can just make a pyramid like thing?
+Yeah let's just make a pyramid.
+I can define the pyramid with 5 points.
+I need two triangles for the bottom and one for each face for a total of 7 triangles.
+Here are the triangles I think:
+-1, -1, 1
+-1, -1, -1
+1, -1, 1
+
+-1, -1, -1
+1, -1, -1
+1, -1, 1
+
+-1, -1, 1
+-1, -1, -1
+0, 1, 0
+
+-1, -1, 1
+1, -1, 1
+0, 1, 0
+
+1, -1, 1
+1, -1, -1
+0, 1, 0
+
+1, -1, -1
+-1, -1, -1
+0, 1, 0
+
+Can't figure out how to draw it instead of the leg.
+Holy crap I did make a pyramid.
+To get it to render in scene 2 all I had to do was reduce the last argument in glDrawArrays and also bind the buffer to the right vertexbuffer
+Oh and yeah, that works in RS5 as well.
+It just looked all derpy with the transformations.
+
+Well all right, the legs are now pyramids!
+I just derped the herp a bit. Also gotta rotate 'em 180 degrees instead of 90.
+Aw but then the scaling goes off.
+Fixed the scaling, now I gotta fix the translation.
+And done. Trial and error, that's how I did it.
+
+They look like two dimensional cutouts though. Perhaps the BFC is messing shit up?
+Yup, disabled it.
+Sigh, and now I've gotta add feet as well?
+
+Well at least they can be cubes.
+And now that's done.
+I just re-loaded the original vertexbuffer after doing the legs and then copied the steps like it's done for the other objects.
+I experimented through trial and error until I got something that looked about right, this took somewhere between 5 and 15 minutes.
+
+# COLORS
+So if I create a 12*3 GLfloat thing like the color buffer but with the same color on every line then the entire thing is rendered in that color.
+So all I need are 4 such buffers with different colors.
+And then I need to load them at the right time as well. I mean, at the right place in the code.
+Gotta swap those buffers, y'know?
+Right so I'm using http://www.rapidtables.com/web/color/RGB_Color.htm to pick a color.
+To find the float values needed I divide the integer value given by the picker thing by 255.
+
+RED     = 0.8f, 0.0f, 0.0f
+YELLOW  = 1.0f, 1.0f, 0.2f
+BLUE    = 0.0f, 0.5f, 1.0f
+GREEN   = 0.0f, 0.6f, 0.3f
+
+Red = colorbufferRed
+yellow = colorbufferYellow
+and so on
+
+Hmm, regardless of which colorbuffer I bind it all renders as red
+Shouldn't the interpolation of two equal values equal the value?
+Yeah, I just forgot to add /g on my substitution command when I copied the code from red.
+You didn't specify what color the feet should be so I made them the same color as their leg.
+This required that I expand the yellow and blue color buffers as they originally only had 21 color values -- the number required for the four faced pyramid.
+
+
+# make the camera follow the...
+no. I've spent more than 6 hours on this.
+90% of that time was devoted to OpenGL, which isn't even a part of the course's curriculum.
+I don't mind learning OpenGL, I just don't have unlimited free time.
+Fuck this.
+
+Here's some feedback I'm writing down so I don't forget it:
+Doesn't make sense to have mandatory assignments that take upwards of 10 hours each, of which 90% is spent figuring out a framework/library/technology that isn't part of the course's curriculum and not listed as something you need to know to be eligible for the course.
+Theory exercises from the book would pack a better ratio of directly applicable/relevant knowledge to time invested.

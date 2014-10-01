@@ -1,0 +1,47 @@
+\section{Homework is radical}
+Before starting on the actual homework I looked at the presentation, googled around a bit to see if there was an existing tutorial which the homework had been lifted from, looked at the presentation again, looked at the code, tried to make sense of it, looked at the presentation, looked at the code, ran the code, tried modifying the code, and so on.
+Eventually I got around to the actual exercises/tasks/whatever.
+
+\subsection{Make the hip joints rotate like the legs}
+Figured I could make the legs children of the hip joints in the hierarchy.
+To accomplish this I did exactly the same initialization steps as were already in place for MODEL\_LEG\_1 and 2 but for two new variables I called MODEL\_HJ\_1 and 2.
+I redefined the MVP for the hip joints to include the relevant MODEL\_HJ and also included this in the MVP definition for the legs.
+After that I changed the animation code specific to scene 5 in Idle() so that the rotation would be applied to the new hip joint models instead of the legs.
+When I ran this I noticed the joints and legs were rotating in opposite directions.
+``Strange,'' I thought.
+I commented out the rotation code for one of the joints and ran it.
+It became clear that HIP JOINT 1 was aligned with LEG 2 and vice versa.
+I fixed this by swapping the translation vectors for the hip joints in the initialization code in RenderScene5(), effectively swapping the placement of the joints.
+After I'd done this everything worked.
+
+\subsection{Replace the legs and add feet.}
+I first spent some time wondering if I could get away with adding a cuboid as the feet and attaching them below the feet in the hierarchy.
+I could claim ``that any given model in the hierarchical model also includes its children so the legs, now consisting also of a child aren't cuboids anymore.''
+But I decided instead to make a pyramid.
+
+Using a pen and some paper and the machinations of my mind I worked out the five coordinates you need to define a four sided pyramid.
+I could've made a three sided pyramid instead, which would've been easier, but I only just realized that as I am writing this report.
+From the coordinates I wrote down the triangles into a variable I called g\_vertex\_buffer\_data2 right next to the one that defines the cube.
+I copied the code I figured was related to the initialization of a buffer or VBO or whatever -- the stuff I needed to be able to access it I think -- from the already existing buffer data definitionss, rewriting the variable references.
+
+To figure out how to draw it I modified scene 2 so that the glBindBuffer() call used the pyramid buffer instead.
+I also changed the glDrawArrays() call to draw 7 triangles instead of 12.
+Seeing that this rendered the pyramid I attempted to do the same in scene 5 with the legs.
+At first it seemed like copying the changes I'd made to scene 2 didn't cut it -- it still looked like a cuboid.
+I started commenting out lines related to the legs and realized it was due to the transformations being applied.
+Through trial and error, and experimenting with scene 2, I figured out how to rotate the pyramid so that the pointy end was downwards and it was properly aligned.
+
+The legs in place, I moved on to the feet:
+There was no limitation on their shape, so I went the easy way and re-used the cube buffer from the hip and hip joints.
+I copied the code for the legs and renamed the variables and also introduced MODEL\_FEET\_1 and 2 into the MVP definition (this placed them in the right place in the hierarchy).
+MODEL\_FEET\_1 and 2 were defined in the same manner as the hip joint models I discussed earlier.
+Through trial and error I managed to scale them to a passable size and shape.
+Figuring out the translation matrix was also done through trial and error.
+
+\subsection{Change the color of objects.}
+
+I created one colorbuffer for each color, copy pasting the existing one but renaming stuff.
+I found the RGB values for the colors using \url{http://www.rapidtables.com/web/color/RGB_Color.htm}.
+I divided the HEX (0-255) value of each color by 255 to find the appropriate 0-1 value.
+The appropriate colorbuffer is bound before each limb is drawn.
+
