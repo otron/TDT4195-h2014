@@ -1,0 +1,15 @@
+\section{Homework is radical}
+Before starting on the actual homework I looked at the presentation, googled around a bit to see if there was an existing tutorial which the homework had been lifted from, looked at the presentation again, looked at the code, tried to make sense of it, looked at the presentation, looked at the code, ran the code, tried modifying the code, and so on.
+Eventually I got around to the actual exercises/tasks/whatever.
+
+\subsection{Make the hip joints rotate like the legs}
+Figured I could make the legs children of the hip joints in the hierarchy.
+To accomplish this I did exactly the same initialization steps as were already in place for MODEL\_LEG\_1 and 2 but for two new variables I called MODEL\_HJ\_1 and 2.
+I redefined the MVP for the hip joints to include the relevant MODEL\_HJ and also included this in the MVP definition for the legs.
+After that I changed the animation code specific to scene 5 in Idle() so that the rotation would be applied to the new hip joint models instead of the legs.
+When I ran this I noticed the joints and legs were rotating in opposite directions.
+``Strange,'' I thought.
+I commented out the rotation code for one of the joints and ran it.
+It became clear that HIP JOINT 1 was aligned with LEG 2 and vice versa.
+I fixed this by swapping the translation vectors for the hip joints in the initialization code in RenderScene5(), effectively swapping the placement of the joints.
+After I'd done this everything worked.
