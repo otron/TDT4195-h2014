@@ -589,7 +589,7 @@ void RenderScene5()
     // ========== HIP JOINT 1
     // =================================================================================
     //transform the cube
-    Model      = glm::translate(glm::mat4(1.0f),glm::vec3(1,0,0));
+    Model      = glm::translate(glm::mat4(1.0f),glm::vec3(-1,0,0));
     Model      = glm::scale(Model,glm::vec3(0.2,0.2,0.2));
     // MVP
     MVP2        = Projection * View * MODEL_EVERYTHING * Model;
@@ -600,7 +600,7 @@ void RenderScene5()
     // ========== HIP JOINT 2
     // =================================================================================
     // Transform the cube
-    Model      = glm::translate(glm::mat4(1.0f),glm::vec3(-1,0,0));
+    Model      = glm::translate(glm::mat4(1.0f),glm::vec3(1,0,0));
     Model      = glm::scale(Model,glm::vec3(0.2,0.2,0.2));
     // MVP
     MVP3        = Projection * View * MODEL_EVERYTHING * Model;
