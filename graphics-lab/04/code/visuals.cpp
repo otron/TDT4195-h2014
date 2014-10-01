@@ -33,9 +33,10 @@ int last_time, current_time;
 GLuint MatrixID; // Handler Matrix for moving the cam
 glm::mat4 MVP; // FInal Homogeneous Matrix
 
-glm::mat4 MVP1,MVP2,MVP3,MVP4,MVP5, MODEL_EVERYTHING, MODEL_LEG_1, MODEL_LEG_2;
+glm::mat4 MVP1,MVP2,MVP3,MVP4,MVP5, MVP6, MVP7;
+glm::mat4 MODEL_EVERYTHING, MODEL_LEG_1, MODEL_LEG_2;
 glm::mat4 Projection,View,Model;
-glm::mat4 MODEL_HJ_1, MODEL_HJ_2;
+glm::mat4 MODEL_HJ_1, MODEL_HJ_2, MODEL_FOOT_1, MODEL_FOOT_2;
 
 // Variables for moving camera with mouse
 int mouse_x = 800/2;
@@ -250,6 +251,9 @@ void KeyboardGL( unsigned char c, int x, int y )
 
         MODEL_HJ_1 = glm::mat4(1.0f);
         MODEL_HJ_2 = glm::mat4(1.0f);
+
+        MODEL_FOOT_1 = glm::mat4(1.0f);
+        MODEL_FOOT_2 = glm::mat4(1.0f);
     }
         break;
     case 's':
@@ -651,11 +655,29 @@ void RenderScene5()
     glDrawArrays(GL_TRIANGLES, 0, 7*3); // 12*3 indices starting at 0 -> 12 triangles
 
 
-    // FOOT 1
+    // reload the cube into the buffer
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    
 
+    // FOOT 1
+    Model = glm::mat4(1.0f);
+    Model = glm::scale(Model, glm::vec3(0.2, 0.2, 0.4));
+    Model = glm::translate(Model, glm::vec3(-5, -9, 0.5));
+
+    MVP6 = Projection * View * MODEL_EVERYTHING * MODEL_HJ_1 * MODEL_LEG_1 * Model;
+    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP6[0][0]);
+    glDrawArrays(GL_TRIANGLES, 0, 12*3);
 
 
     // FOOT 2
+    Model = glm::mat4(1.0f);
+    Model = glm::scale(Model, glm::vec3(0.2, 0.2, 0.4));
+    Model = glm::translate(Model, glm::vec3(5, -9, 0.5));
+
+    MVP6 = Projection * View * MODEL_EVERYTHING * MODEL_HJ_2 * MODEL_LEG_2 * Model;
+    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP6[0][0]);
+    glDrawArrays(GL_TRIANGLES, 0, 12*3);
 
 
     //END
