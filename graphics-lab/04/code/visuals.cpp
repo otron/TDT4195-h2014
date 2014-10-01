@@ -24,6 +24,7 @@
 // This will be used with shader
 //GLuint VertexArrayID;
 GLuint vertexbuffer, colorbuffer;
+GLuint colorbufferRed, colorbufferYellow, colorbufferBlue, colorbufferGreen;
 GLuint vertexbufferPyramid;
 GLuint objvertexbuffer; // for obj
 GLuint programID_1, programID_2;
@@ -171,6 +172,7 @@ void Idle()
     {
 
         counter =counter+0.002*dt;
+        // move the entire model onwards
         MODEL_EVERYTHING = glm::translate(MODEL_EVERYTHING,glm::vec3(0,0,0.0013*counter));
 
         MODEL_HJ_1 = glm::rotate(MODEL_HJ_1,float(cos(counter)),glm::vec3(1,0,0));
@@ -451,7 +453,7 @@ void RenderScene2()
 
     // 2nd attribute buffer : colors
     glEnableVertexAttribArray(1);
-    glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferYellow);
     glVertexAttribPointer(
                 1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
                 3,                                // size
@@ -595,7 +597,7 @@ void RenderScene5()
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
     glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,(void*)0);
     glEnableVertexAttribArray(1);
-    glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferGreen);
     glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,0,(void*)0);
     // Draw the trinagles
     glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
@@ -605,6 +607,9 @@ void RenderScene5()
     //transform the cube
     Model      = glm::translate(glm::mat4(1.0f),glm::vec3(-1,0,0));
     Model      = glm::scale(Model,glm::vec3(0.2,0.2,0.2));
+
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferRed);
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,0,(void*)0);
     // MVP
     MVP2        = Projection * View * MODEL_EVERYTHING * MODEL_HJ_1 * Model;
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP2[0][0]);
@@ -632,6 +637,9 @@ void RenderScene5()
     // MVP
     MVP4        = Projection * View * MODEL_EVERYTHING* MODEL_HJ_1 * MODEL_LEG_1* Model;
 
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferYellow);
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,0,(void*)0);
+
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP4[0][0]);
 
     // load our pyramid into the buffer AW YESSS
@@ -650,6 +658,9 @@ void RenderScene5()
     // MVP
     MVP5        = Projection * View *MODEL_EVERYTHING* MODEL_HJ_2 * MODEL_LEG_2* Model;
 
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferBlue);
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,0,(void*)0);
+
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP5[0][0]);
     // Draw the trinagles
     glDrawArrays(GL_TRIANGLES, 0, 7*3); // 12*3 indices starting at 0 -> 12 triangles
@@ -665,6 +676,9 @@ void RenderScene5()
     Model = glm::scale(Model, glm::vec3(0.2, 0.2, 0.4));
     Model = glm::translate(Model, glm::vec3(-5, -9, 0.5));
 
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferYellow);
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,0,(void*)0);
+
     MVP6 = Projection * View * MODEL_EVERYTHING * MODEL_HJ_1 * MODEL_LEG_1 * Model;
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP6[0][0]);
     glDrawArrays(GL_TRIANGLES, 0, 12*3);
@@ -674,6 +688,9 @@ void RenderScene5()
     Model = glm::mat4(1.0f);
     Model = glm::scale(Model, glm::vec3(0.2, 0.2, 0.4));
     Model = glm::translate(Model, glm::vec3(5, -9, 0.5));
+
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferBlue);
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,0,(void*)0);
 
     MVP6 = Projection * View * MODEL_EVERYTHING * MODEL_HJ_2 * MODEL_LEG_2 * Model;
     glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP6[0][0]);
@@ -827,7 +844,6 @@ void SetupGL() //
         0.820f,  0.883f,  0.371f,
         0.982f,  0.099f,  0.879f
     };
-
     // Generate 1 buffer, put the resulting identifier in vertexbuffer
     glGenBuffers(1, &vertexbuffer);
     // The following commands will talk about our 'vertexbuffer' buffer
@@ -870,5 +886,194 @@ void SetupGL() //
     glBindBuffer(GL_ARRAY_BUFFER, vertexbufferPyramid);
     // Give our vertices to OpenGL.
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data2), g_vertex_buffer_data2, GL_STATIC_DRAW);
+
+
+    // RED
+    static const GLfloat g_color_buffer_data_red[] = {
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f,
+        0.8f, 0.0f, 0.0f
+    };
+
+    // Generate 1 buffer, put the resulting identifier in vertexbuffer
+    glGenBuffers(1, &colorbufferRed);
+    // The following commands will talk about our 'vertexbuffer' buffer
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferRed);
+    // Give our vertices to OpenGL.
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data_red), g_color_buffer_data_red, GL_STATIC_DRAW);
+
+    // YELLOW
+    static const GLfloat g_color_buffer_data_yellow[] = {
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f,
+        1.0f, 1.0f, 0.2f
+    };
+
+    // Generate 1 buffer, put the resulting identifier in vertexbuffer
+    glGenBuffers(1, &colorbufferYellow);
+    // The following commands will talk about our 'vertexbuffer' buffer
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferYellow);
+    // Give our vertices to OpenGL.
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data_yellow), g_color_buffer_data_yellow, GL_STATIC_DRAW);
+
+    // BLUE
+    static const GLfloat g_color_buffer_data_blue[] = {
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f,
+        0.0f, 0.5f, 1.0f
+    };
+
+    // Generate 1 buffer, put the resulting identifier in vertexbuffer
+    glGenBuffers(1, &colorbufferBlue);
+    // The following commands will talk about our 'vertexbuffer' buffer
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferBlue);
+    // Give our vertices to OpenGL.
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data_blue), g_color_buffer_data_blue, GL_STATIC_DRAW);
+
+    static const GLfloat g_color_buffer_data_green[] = {
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f,
+        0.0f, 0.6f, 0.3f
+    };
+
+    // Generate 1 buffer, put the resulting identifier in vertexbuffer
+    glGenBuffers(1, &colorbufferGreen);
+    // The following commands will talk about our 'vertexbuffer' buffer
+    glBindBuffer(GL_ARRAY_BUFFER, colorbufferGreen);
+    // Give our vertices to OpenGL.
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data_green), g_color_buffer_data_green, GL_STATIC_DRAW);
+
 
 }
