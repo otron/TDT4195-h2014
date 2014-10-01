@@ -24,6 +24,7 @@
 // This will be used with shader
 //GLuint VertexArrayID;
 GLuint vertexbuffer, colorbuffer;
+GLuint vertexbufferPyramid;
 GLuint objvertexbuffer; // for obj
 GLuint programID_1, programID_2;
 
@@ -786,8 +787,6 @@ void SetupGL() //
         0.982f,  0.099f,  0.879f
     };
 
-
-
     // Generate 1 buffer, put the resulting identifier in vertexbuffer
     glGenBuffers(1, &vertexbuffer);
     // The following commands will talk about our 'vertexbuffer' buffer
@@ -802,6 +801,33 @@ void SetupGL() //
     // Give our vertices to OpenGL.
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
+    // this should be a pyramid I think.
+    static const GLfloat g_vertex_buffer_data2[] = {
+        -1.0f, -1.0f, 1.0f,
+        -1.0f, -1.0f, -1.0f,
+        1.0f, -1.0f, 1.0f,
+        -1.0f, -1.0f, -1.0f,
+        1.0f, -1.0f, -1.0f,
+        1.0f, -1.0f, 1.0f,
+        -1.0f, -1.0f, 1.0f,
+        -1.0f, -1.0f, -1.0f,
+        0.0f, 1.0f, 0.0f,
+        -1.0f, -1.0f, 1.0f,
+        1.0f, -1.0f, 1.0f,
+        0.0f, 1.0f, 0.0f,
+        1.0f, -1.0f, 1.0f,
+        1.0f, -1.0f, -1.0f,
+        0.0f, 1.0f, 0.0f,
+        1.0f, -1.0f, -1.0f,
+        -1.0f, -1.0f, -1.0f,
+        0.0f, 1.0f, 0.0f,
+    };
 
+    // Generate 1 buffer, put the resulting identifier in vertexbuffer
+    glGenBuffers(1, &vertexbufferPyramid);
+    // The following commands will talk about our 'vertexbuffer' buffer
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbufferPyramid);
+    // Give our vertices to OpenGL.
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data2), g_vertex_buffer_data2, GL_STATIC_DRAW);
 
 }
