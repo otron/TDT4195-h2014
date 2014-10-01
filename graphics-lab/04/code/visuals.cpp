@@ -571,7 +571,7 @@ void RenderScene5()
     //    MODEL_LEG_2= IT is initalized as identity matrix
 
     //Enable back-Face culling
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
     // Enable depth test
     glEnable(GL_DEPTH_TEST);
     // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
