@@ -86,10 +86,16 @@ magnitude(B(:))
 % Task 3: Basic image processing in matlab (see functions that start with im in matlab)
 
 % Task 3.1: Read one of the testimages (i.e. mandrill.png, lena.png ..) from disk into a matrix
+img = imread("TestImages/Question 6/bricks.png");
 
 % Task 3.2: Convert image to grayscale
+img_gs = rgb2gray(img);
 
 % Task 3.3: Convert image to floating point (double) representation
+
+img_fp = im2double(img);
+imshow(img_fp)
+wait(50000)
 
 % Task 3.4: Show image on screen (remember to put figure; before this and all other commands that displays something on screen to insure that all images are shown)
 
