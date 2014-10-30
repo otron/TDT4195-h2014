@@ -86,7 +86,7 @@ magnitude(B(:))
 % Task 3: Basic image processing in matlab (see functions that start with im in matlab)
 
 % Task 3.1: Read one of the testimages (i.e. mandrill.png, lena.png ..) from disk into a matrix
-img = imread("TestImages/Question 6/bricks.png");
+img = imread("bricks.png");
 
 % Task 3.2: Convert image to grayscale
 img_gs = rgb2gray(img);
@@ -115,7 +115,10 @@ gray_min = min(img_gs(:))
 imhist(img);
 
 % Task 3.9: Save image to disk and call it result.png
-export(imhist(img), "result.png");
+
+% not yet implemented in octave/statistics
+%export(imhist(img), "result.png");
+
 
 
 pause() % sending 'k' to the terminal it's running in kills it
