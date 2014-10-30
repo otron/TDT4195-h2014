@@ -45,6 +45,20 @@ If there's no spikes in either end of the histogram.
 \subsubsection{}
 \inputminted[linenos=true]{octave}{../code/exercise04-3.m}
 
+\section{Noise}
+\subsubsection{}
+With density $= 1$, every pixel in the picture is set to either 0 or 255.
+With density $= 0$ the picture remains unchanged.
+
+It would seem that density is the percentage of the pixels in the image that are affected (set to either white and black).
+\inputminted[linenos=true]{octave}{../code/exercise05.m}
+
+Matlab has implemented Gaussian white noise with constant mean and variance, zero-mean Gaussian white noise with intensity-dependent variance, Poisson noise and multiplicative noise (`speckle') in addition to salt \& pepper.
+So I can name those at least.
+
+\section{Aliasing}
+
+
 \section{Kahoot!}
 
 Normalization means:
