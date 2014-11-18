@@ -25,3 +25,27 @@ Table~\ref{tab:11a} was produced using the partial filter method for the two fir
 Nope!
 If we pad the edges with zeroes the result is the same.
 Padding with anything other than zeroes changes the result in a way that isn't representative of the original image with the given filter applied.
+
+\subsection{Convolution}
+
+\subsubsection{Compute the continuous convolution of two identical rectangular functions.}
+The functions are $1$ in the range $[-\frac{1}{2}, \frac{1}{2}]$ and $0$ otherwise.
+
+$$
+(f * g)(t) =
+\begin{cases}
+    1+t & \text{if } -1 < t \leq 0 \\
+    1-t & \text{if } 0 < t \leq 1 \\
+    0 & \text{otherwise}
+\end{cases}
+$$
+
+As $g$ slides along the axis from left to right it hits $f$ when $t=-1$.
+For $t \in (-1, 0]$ the intersection of the areas of $f$ and $g$ grow from 0 to 1.
+For $t \in (0, 1]$ the intersection decreases from 1 to 0.
+The area of the intersection is 1 when $t$ is 0.
+
+\subsubsection{What shape did I expect?}
+It would make more sense to ask me this \textit{before} I computed the convolution.
+
+But whatever: triangle!
