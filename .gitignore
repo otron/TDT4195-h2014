@@ -16,6 +16,6 @@
 # compiled stuff and cmake generated things
 CMakeCache.txt
 CMakeFiles/
-Makefile
+graphics-lab/**/Makefile
 Hello_world_GL
 cmake_install.cmake
