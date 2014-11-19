@@ -7,7 +7,7 @@ function res = avgfilter(img, n, m)
     res = img(newOx:height-a, newOy:width-b);
     for i = newOx:height-a
         for j = newOy:width-b
-            res(i-a, j-b) = (1/(n*m))*avg(neighborhood(img, i, j, n, m));
+            res(i-a, j-b) = ceil(avg(neighborhood(img, i, j, n, m)));
         end
     end
 end
