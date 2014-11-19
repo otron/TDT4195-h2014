@@ -1,1 +1,2 @@
 test avg
+test neighborhood
