@@ -1,5 +1,5 @@
-all: 1-2.m
-	octave -q 1-2.m
+all: 2.1.m
+	octave -q 2.1.m
 
 .PHONY: test
 test:
