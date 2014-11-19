@@ -11,3 +11,5 @@ function res = avgfilter(img, n, m)
         end
     end
 end
+
+%It's a box averaging filter. No support for different coefficients.
