@@ -66,3 +66,12 @@ While Figure~\ref{fig:2-2-2} shows it applied to images with gaussian noise adde
     \caption{Median filter of varying sizes applied to image with gaussian noise.}
     \label{fig:2-2-2}
 \end{figure}
+
+Code used to generate images:
+\inputminted[linenos=true]{octave}{../code/2.2.m}
+
+Code for the median filter:
+\inputminted[linenos=true]{octave}{../code/medianfilter.m}
+
+\texttt{med.m}, a function that computes the median value of a matrix by reshaping it into a one-dimensional list and using the builtin \texttt{median} function on the result.
+\inputminted[linenos=true]{octave}{../code/med.m}
