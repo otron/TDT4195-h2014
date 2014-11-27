@@ -60,3 +60,16 @@ The original noisy images are displayed for comparison.
     \caption{Averaging filter of varying sizes applied to image with gaussian noise.}
     \label{fig:2-1-2}
 \end{figure}
+
+\subsection{Code}
+Code used to generate the images:
+\inputminted[linenos=true]{octave}{../code/2.1.m}
+
+\texttt{average.m}, the averaging filter function:
+\inputminted[linenos=true]{octave}{../code/avgfilter.m}
+
+\texttt{avg.m}, a function that computes the average (mean) value of a matrix:
+\inputminted[linenos=true]{octave}{../code/avg.m}
+
+\texttt{neighborhood.m}, a function that returns the \texttt{n x m} neighbourhood of a pixel at coordinates $(x,y)$ in a given image.
+\inputminted[linenos=true]{octave}{../code/neighborhood.m}
